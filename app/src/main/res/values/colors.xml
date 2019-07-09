@@ -6,6 +6,7 @@
 
     //costume
     <color name="greyTheme">#222f3e</color>
+    <color name="backtheme">#c8d6e5</color>
 
 
     <!-- dots inactive colors -->
