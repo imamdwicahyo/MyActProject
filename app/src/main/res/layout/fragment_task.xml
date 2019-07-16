@@ -6,15 +6,84 @@
     android:layout_height="match_parent"
     tools:context=".view.fragment.HomeFragment">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/backtheme"
+        android:orientation="vertical">
 
-        <TextView
+        <LinearLayout
+            android:id="@+id/title"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Task"/>
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginHorizontal="5dp"
+            android:background="@android:color/white"
+            android:gravity="center_vertical">
 
-    </LinearLayout>
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="20dp"
+                app:srcCompat="@drawable/ic_menu_black_24dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Your Activity"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"/>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/title">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_task"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@id/add_task"
+                android:layout_marginTop="10dp"
+                />
+
+            <RelativeLayout
+                android:id="@+id/add_task"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginHorizontal="5dp"
+                android:background="@drawable/rounded_white"
+                android:gravity="center_vertical">
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="19dp"
+                    android:layout_marginRight="11dp"
+                    android:layout_toLeftOf="@id/btn_add"
+                    android:hint="Take a activity" />
+
+                <ImageView
+                    android:id="@+id/btn_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="9dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_alignParentRight="true"
+                    app:srcCompat="@drawable/ic_add_circle_black_24dp"/>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>

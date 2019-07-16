@@ -8,12 +8,26 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
 
-        <TextView
+        <EditText
+            android:id="@+id/ed_kegiatan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Profil"/>
+            android:hint="Kegiatan"/>
+
+        <EditText
+            android:id="@+id/ed_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="time"/>
+        <Button
+            android:id="@+id/btn_simpan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Simpan"/>
 
     </LinearLayout>
 
