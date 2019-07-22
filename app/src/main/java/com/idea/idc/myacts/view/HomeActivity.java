@@ -2,7 +2,6 @@ package com.idea.idc.myacts.view;
 
 import android.arch.persistence.room.Room;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -10,10 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.annotation.NonNull;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
-import android.widget.TextView;
 
-import com.idea.idc.myacts.ListActivity;
 import com.idea.idc.myacts.R;
 import com.idea.idc.myacts.database.AppDatabase;
 import com.idea.idc.myacts.entity.Aktivitas;

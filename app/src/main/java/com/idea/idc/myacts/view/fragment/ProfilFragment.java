@@ -54,11 +54,6 @@ public class ProfilFragment extends Fragment {
             }
         });
 
-
-
-
-
-
         return view;
     }
 }

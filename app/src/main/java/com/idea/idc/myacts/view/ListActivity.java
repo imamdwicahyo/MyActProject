@@ -1,4 +1,4 @@
-package com.idea.idc.myacts;
+package com.idea.idc.myacts.view;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.idea.idc.myacts.R;
 import com.idea.idc.myacts.ui.main.SectionsPagerAdapter;
 
 public class ListActivity extends AppCompatActivity {

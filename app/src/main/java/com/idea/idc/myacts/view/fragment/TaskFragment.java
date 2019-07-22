@@ -11,17 +11,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.idea.idc.myacts.R;
 import com.idea.idc.myacts.adapter.AktivitasAdapter;
-import com.idea.idc.myacts.adapter.TaskAdapter2;
-import com.idea.idc.myacts.adapter.TaskAdapter3;
 import com.idea.idc.myacts.database.AppDatabase;
 import com.idea.idc.myacts.entity.Aktivitas;
-import com.idea.idc.myacts.model.AktivitasModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,15 +33,23 @@ public class TaskFragment extends Fragment{
     private List<Aktivitas> aktivitasList = new ArrayList<>();
     private AppCompatDialog dialog;
 
+    private ImageView btn_add;
+
+    public TaskFragment() {
+    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-
         final View view = inflater.inflate(R.layout.fragment_task, container, false);
-        aktivitasList = onLoad(view,db); // ambil data dari database
+
+        db = Room.databaseBuilder(getContext(),AppDatabase.class,"aktivitas")
+                .allowMainThreadQueries().build();
+
+
+        aktivitasList = onLoad(view); // ambil data dari database
 
         // seting recyclerview
         recyclerView = view.findViewById(R.id.recycler_task);
@@ -59,6 +66,26 @@ public class TaskFragment extends Fragment{
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(aktivitasAdapter);
 
+        // fungsiadd
+        btn_add = view.findViewById(R.id.btn_add);
+        btn_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText ed_add_kegiatan = view.findViewById(R.id.ed_add_kegiatan);
+
+                Aktivitas aktivitas = new Aktivitas();
+                aktivitas.setKegiatan(ed_add_kegiatan.getText().toString());
+                aktivitas.setTime("");
+
+                db.aktivitasDao().addAktivitas(aktivitas);
+                Toast.makeText(getContext(),"Data Ditambahkan", Toast.LENGTH_SHORT).show();
+
+
+                aktivitasList = db.aktivitasDao().getAll();
+                aktivitasAdapter.notifyDataSetChanged();
+            }
+        });
+
 
         return view;
     }
@@ -66,25 +93,59 @@ public class TaskFragment extends Fragment{
 
     // fungsi ini untuk mengambil data dari database (tabel aktivitas)
     // lalu memasukannya kedalam list array 'aktivitasList'
-    private List<Aktivitas> onLoad(View view, AppDatabase appDatabase){
-        appDatabase = Room.databaseBuilder(getContext(),AppDatabase.class,"aktivitas")
-                .allowMainThreadQueries().build();
+    private List<Aktivitas> onLoad(View view){
+
 
         //mengisi data aktivitas List
-        List<Aktivitas> act = appDatabase.aktivitasDao().getAll();
+        List<Aktivitas> act = db.aktivitasDao().getAll();
         return act;
     }
 
-    private void showDialogUpdate(Aktivitas aktivitas){
+    private void showDialogUpdate(final Aktivitas aktivitas){
         dialog = new AppCompatDialog(getContext());
         dialog.setContentView(R.layout.dialog_aktivitas);
         dialog.setTitle("Ubah Aktifitas");
 
         final EditText ed_kegiatan = dialog.findViewById(R.id.ed_kegiatan);
+        final TextView txt_id = dialog.findViewById(R.id.txt_id);
+        int id = aktivitas.getId();
         ed_kegiatan.setText(aktivitas.getKegiatan());
+        txt_id.setText(String.valueOf(id));
+
+        Button btn_simpan = dialog.findViewById(R.id.btn_simpan);
+        btn_simpan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                aktivitas.setId(Integer.parseInt(txt_id.getText().toString()));
+                aktivitas.setKegiatan(ed_kegiatan.getText().toString());
+                aktivitas.setTime("");
+
+                db.aktivitasDao().updateAktivitas(aktivitas);
+                Toast.makeText(getContext(),"Update berhasil", Toast.LENGTH_SHORT).show();
+
+                dialog.dismiss();
+            }
+        });
+
+        Button btn_hapus = dialog.findViewById(R.id.btn_hapus);
+        btn_hapus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                aktivitas.setId(Integer.parseInt(txt_id.getText().toString()));
+                aktivitas.setKegiatan(ed_kegiatan.getText().toString());
+                aktivitas.setTime("");
+
+                db.aktivitasDao().deleteAktivitas(aktivitas);
+
+                Toast.makeText(getContext(),"Data terhapus", Toast.LENGTH_SHORT).show();
+
+                dialog.dismiss();
+            }
+        });
 
         if (!dialog.isShowing()) {
             dialog.show();
         }
     }
+
 }

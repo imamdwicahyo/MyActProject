@@ -4,6 +4,7 @@ import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
+import android.arch.persistence.room.Update;
 
 import com.idea.idc.myacts.entity.Aktivitas;
 
@@ -17,6 +18,9 @@ public interface AktivitasDao {
 
     @Insert
     void addAktivitas(Aktivitas aktivitas);
+
+    @Update
+    void updateAktivitas(Aktivitas aktivitas);
 
     @Delete
     void deleteAktivitas(Aktivitas aktivitas);
