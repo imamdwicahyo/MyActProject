@@ -1,4 +1,4 @@
-package com.idea.idc.myacts.Preference;
+package com.idea.idc.myacts.preference;
 
 import android.content.Context;
 import android.content.SharedPreferences;

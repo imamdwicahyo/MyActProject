@@ -40,6 +40,6 @@ public class SplashScreenActivity extends AppCompatActivity {
                         WalkthroughActivity.class));
                 finish();
             }
-        },3000);
+        },0);
     }
 }

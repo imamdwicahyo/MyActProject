@@ -16,7 +16,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.idea.idc.myacts.Preference.PrefManager;
+import com.idea.idc.myacts.preference.PrefManager;
 import com.idea.idc.myacts.R;
 
 public class WalkthroughActivity extends AppCompatActivity {
