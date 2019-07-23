@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@id/btn_hapus"
             android:layout_marginHorizontal="10dp"
-            android:text="Hapus"/>
+            android:text="Simpan"/>
 
     </RelativeLayout>
 

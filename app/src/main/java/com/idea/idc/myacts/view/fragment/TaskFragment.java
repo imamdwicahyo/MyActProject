@@ -35,8 +35,6 @@ public class TaskFragment extends Fragment{
 
     private ImageView btn_add;
 
-    public TaskFragment() {
-    }
 
     @Nullable
     @Override
@@ -80,8 +78,8 @@ public class TaskFragment extends Fragment{
                 db.aktivitasDao().addAktivitas(aktivitas);
                 Toast.makeText(getContext(),"Data Ditambahkan", Toast.LENGTH_SHORT).show();
 
-
-                aktivitasList = db.aktivitasDao().getAll();
+                aktivitasList.clear();
+                aktivitasList.addAll(db.aktivitasDao().getAll());
                 aktivitasAdapter.notifyDataSetChanged();
             }
         });
@@ -124,6 +122,9 @@ public class TaskFragment extends Fragment{
                 Toast.makeText(getContext(),"Update berhasil", Toast.LENGTH_SHORT).show();
 
                 dialog.dismiss();
+                aktivitasList.clear();
+                aktivitasList.addAll(db.aktivitasDao().getAll());
+                aktivitasAdapter.notifyDataSetChanged();
             }
         });
 
@@ -140,6 +141,9 @@ public class TaskFragment extends Fragment{
                 Toast.makeText(getContext(),"Data terhapus", Toast.LENGTH_SHORT).show();
 
                 dialog.dismiss();
+                aktivitasList.clear();
+                aktivitasList.addAll(db.aktivitasDao().getAll());
+                aktivitasAdapter.notifyDataSetChanged();
             }
         });
 
