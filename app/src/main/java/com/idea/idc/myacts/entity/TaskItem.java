@@ -7,7 +7,8 @@ import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.PrimaryKey;
 
 
-@Entity(foreignKeys = @ForeignKey(entity = TaskList.class,
+@Entity(tableName = "task_item",
+        foreignKeys = @ForeignKey(entity = TaskList.class,
                                   parentColumns = "id_list",
                                   childColumns = "id_list"))
 public class TaskItem {
@@ -28,6 +29,9 @@ public class TaskItem {
 
     @ColumnInfo(name = "time")
     private String time;
+
+    @ColumnInfo(name = "status")
+    private String status;
 
     public int getId_task() {
         return id_task;
@@ -75,5 +79,13 @@ public class TaskItem {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

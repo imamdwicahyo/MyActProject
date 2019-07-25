@@ -38,7 +38,7 @@
 
         </LinearLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/title_taksList"
             android:layout_width="match_parent"
             android:layout_marginTop="10dp"
@@ -59,14 +59,24 @@
             <EditText
                 android:id="@+id/txt_desc"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="80dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
+                android:layout_below="@id/txt_name"
                 android:inputType="text|textMultiLine"
                 android:hint="deskripsi task"
                 android:gravity="center_vertical"/>
 
-        </LinearLayout>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txt_desc"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_alignParentRight="true"
+                android:text="update data"/>
+
+        </RelativeLayout>
 
         <Button
             android:id="@+id/btn_add_task"
@@ -78,7 +88,7 @@
             android:layout_below="@id/title_taksList"/>
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_task"
+            android:id="@+id/recycler_taskItem"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/btn_add_task"
