@@ -1,6 +1,7 @@
 package com.idea.idc.myacts.view.fragment;
 
 import android.arch.persistence.room.Room;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -19,16 +20,23 @@ import android.widget.Toast;
 
 import com.idea.idc.myacts.R;
 import com.idea.idc.myacts.adapter.AktivitasAdapter;
+import com.idea.idc.myacts.adapter.TaskListAdapter;
 import com.idea.idc.myacts.database.AppDatabase;
 import com.idea.idc.myacts.entity.Aktivitas;
+import com.idea.idc.myacts.entity.TaskList;
+import com.idea.idc.myacts.view.TaskDetail;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TaskFragment extends Fragment{
 
+    public static final String ID_MESSAGE = "com.idea.idc.myacts.ID";
+
     public static AppDatabase db;
     private RecyclerView recyclerView;
+    private TaskListAdapter taskListAdapter;
+    private List<TaskList> taskLists;
     private AktivitasAdapter aktivitasAdapter;
     private List<Aktivitas> aktivitasList = new ArrayList<>();
     private AppCompatDialog dialog;
@@ -47,40 +55,46 @@ public class TaskFragment extends Fragment{
                 .allowMainThreadQueries().build();
 
 
-        aktivitasList = onLoad(view); // ambil data dari database
+        taskLists = db.taskListDao().getAll();
 
         // seting recyclerview
         recyclerView = view.findViewById(R.id.recycler_task);
-        aktivitasAdapter = new AktivitasAdapter(aktivitasList);
-        aktivitasAdapter.setOnCallbackListener(new AktivitasAdapter.OnCallbackListener() {
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        taskListAdapter = new TaskListAdapter(taskLists);
+
+        taskListAdapter.setOnCallbackListener(new TaskListAdapter.OnCallbackListener() {
             @Override
-            public void onClick(Aktivitas aktivitas) {
-                Toast.makeText(getContext(),aktivitas.getKegiatan()+" ditekan",Toast.LENGTH_SHORT).show();
-                showDialogUpdate(aktivitas);
+            public void onClick(TaskList task) {
+                Toast.makeText(getContext()," ditekan",Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(getContext(), TaskDetail.class);
+                String id_message = String.valueOf(task.getId_list());
+                intent.putExtra(ID_MESSAGE, id_message);
+                startActivity(intent);
             }
         });
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity()
-                , LinearLayoutManager.VERTICAL, false);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(aktivitasAdapter);
+;
+        recyclerView.setAdapter(taskListAdapter);
 
         // fungsiadd
         btn_add = view.findViewById(R.id.btn_add);
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText ed_add_kegiatan = view.findViewById(R.id.ed_add_kegiatan);
+                EditText txt_name = view.findViewById(R.id.ed_add_kegiatan);
 
-                Aktivitas aktivitas = new Aktivitas();
-                aktivitas.setKegiatan(ed_add_kegiatan.getText().toString());
-                aktivitas.setTime("");
+                TaskList task = new TaskList();
+                task.setName(txt_name.getText().toString());
+                task.setDescription("");
+                task.setStatus("0");
 
-                db.aktivitasDao().addAktivitas(aktivitas);
-                Toast.makeText(getContext(),"Data Ditambahkan", Toast.LENGTH_SHORT).show();
+                db.taskListDao().insertTaskList(task);
+                taskLists.clear();
+                taskLists.addAll(db.taskListDao().getAll());
+                taskListAdapter.notifyDataSetChanged();
 
-                aktivitasList.clear();
-                aktivitasList.addAll(db.aktivitasDao().getAll());
-                aktivitasAdapter.notifyDataSetChanged();
+                Toast.makeText(getContext(),"Data Ditambahkan",Toast.LENGTH_SHORT).show();
             }
         });
 

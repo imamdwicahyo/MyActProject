@@ -10,27 +10,44 @@ public class TaskList {
     @PrimaryKey(autoGenerate = true)
     private int id_list;
 
+    @ColumnInfo(name = "name")
+    private String name;
+
     @ColumnInfo(name = "desc")
     private String description;
 
     @ColumnInfo(name = "status")
     private String status;
 
-    public TaskList(int id_list, String description, String status) {
-        this.id_list = id_list;
-        this.description = description;
-        this.status = status;
-    }
-
     public int getId_list() {
         return id_list;
+    }
+
+    public void setId_list(int id_list) {
+        this.id_list = id_list;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDescription() {
         return description;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public String getStatus() {
         return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

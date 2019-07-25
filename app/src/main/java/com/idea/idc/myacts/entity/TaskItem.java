@@ -28,4 +28,52 @@ public class TaskItem {
 
     @ColumnInfo(name = "time")
     private String time;
+
+    public int getId_task() {
+        return id_task;
+    }
+
+    public void setId_task(int id_task) {
+        this.id_task = id_task;
+    }
+
+    public int getId_list() {
+        return id_list;
+    }
+
+    public void setId_list(int id_list) {
+        this.id_list = id_list;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
 }
