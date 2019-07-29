@@ -5,6 +5,11 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.PrimaryKey;
+import android.arch.persistence.room.TypeConverters;
+
+import com.idea.idc.myacts.database.Converters;
+
+import java.util.Date;
 
 
 @Entity(tableName = "task_item",
@@ -25,7 +30,8 @@ public class TaskItem {
     private String desc;
 
     @ColumnInfo(name = "date")
-    private String date;
+    @TypeConverters({Converters.class})
+    private Date date;
 
     @ColumnInfo(name = "time")
     private String time;
@@ -65,11 +71,11 @@ public class TaskItem {
         this.desc = desc;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

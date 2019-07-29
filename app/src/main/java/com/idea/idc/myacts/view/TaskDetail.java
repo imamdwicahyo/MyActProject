@@ -1,17 +1,23 @@
 package com.idea.idc.myacts.view;
 
+import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.arch.persistence.room.Room;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.idea.idc.myacts.R;
@@ -23,7 +29,10 @@ import com.idea.idc.myacts.entity.TaskItem;
 import com.idea.idc.myacts.entity.TaskList;
 import com.idea.idc.myacts.view.fragment.TaskFragment;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 public class TaskDetail extends AppCompatActivity {
 
@@ -34,6 +43,9 @@ public class TaskDetail extends AppCompatActivity {
     private Button btn_add_task;
     private List<TaskItem> taskItems;
     private Dialog dialog;
+    private DatePickerDialog datePickerDialog;
+    private TimePickerDialog timePickerDialog;
+    private SimpleDateFormat dateFormatter;
     private int id;
 
     @Override
@@ -52,6 +64,7 @@ public class TaskDetail extends AppCompatActivity {
                 .allowMainThreadQueries().build();
 
         TaskList task = db.taskListDao().getTaskById(id);
+        dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
 
         txt_name.setText(task.getName());
         txt_desc.setText(task.getDescription());
@@ -104,7 +117,6 @@ public class TaskDetail extends AppCompatActivity {
                 task.setId_list(id);
                 task.setName(ed_taskItem_nama.getText().toString());
                 task.setDesc(ed_taskItem_desc.getText().toString());
-                task.setDate(ed_taskItem_tanggal.getText().toString());
                 task.setTime(ed_taskItem_waktu.getText().toString());
                 task.setStatus("0");
 
@@ -115,6 +127,20 @@ public class TaskDetail extends AppCompatActivity {
                 taskItems.clear();
                 taskItems.addAll(db.taskItemDao().getTaskItemById(id));
                 taskItemAdapter.notifyDataSetChanged();
+            }
+        });
+
+        ed_taskItem_tanggal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDateDialog(ed_taskItem_tanggal, dialog.getContext());
+            }
+        });
+
+        ed_taskItem_waktu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showTimeDialog(ed_taskItem_waktu, dialog.getContext());
             }
         });
 
@@ -137,7 +163,6 @@ public class TaskDetail extends AppCompatActivity {
         txt_id.setText(String.valueOf(task.getId_task()));
         ed_taskItem_nama.setText(task.getName());
         ed_taskItem_desc.setText(task.getDesc());
-        ed_taskItem_tanggal.setText(task.getDate());
         ed_taskItem_waktu.setText(task.getTime());
 
         Button btn_simpan = dialog.findViewById(R.id.btn_simpan);
@@ -149,7 +174,6 @@ public class TaskDetail extends AppCompatActivity {
                 task.setId_list(id);
                 task.setName(ed_taskItem_nama.getText().toString());
                 task.setDesc(ed_taskItem_desc.getText().toString());
-                task.setDate(ed_taskItem_tanggal.getText().toString());
                 task.setTime(ed_taskItem_waktu.getText().toString());
                 task.setStatus("0");
 
@@ -172,7 +196,6 @@ public class TaskDetail extends AppCompatActivity {
                 task.setId_list(id);
                 task.setName(ed_taskItem_nama.getText().toString());
                 task.setDesc(ed_taskItem_desc.getText().toString());
-                task.setDate(ed_taskItem_tanggal.getText().toString());
                 task.setTime(ed_taskItem_waktu.getText().toString());
                 task.setStatus("0");
 
@@ -189,5 +212,38 @@ public class TaskDetail extends AppCompatActivity {
         if (!dialog.isShowing()) {
             dialog.show();
         }
+    }
+
+    private void showDateDialog(final EditText editText, Context context){
+        Calendar newCalendar = Calendar.getInstance();
+        datePickerDialog = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+
+                Calendar newDate = Calendar.getInstance();
+                newDate.set(year, monthOfYear, dayOfMonth);
+
+                editText.setText(dateFormatter.format(newDate.getTime()));
+            }
+
+        },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+
+        datePickerDialog.show();
+    }
+
+    private void showTimeDialog(final EditText editText, Context context){
+        Calendar newCalendar = Calendar.getInstance();
+        timePickerDialog = new TimePickerDialog(context, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+
+                editText.setText(+hourOfDay+":"+minute);
+            }
+        },
+                newCalendar.get(Calendar.HOUR_OF_DAY), newCalendar.get(Calendar.MINUTE),
+                DateFormat.is24HourFormat(context));
+
+        timePickerDialog.show();
     }
 }
