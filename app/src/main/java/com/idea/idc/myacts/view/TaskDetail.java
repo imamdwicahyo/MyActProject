@@ -22,9 +22,7 @@ import android.widget.Toast;
 
 import com.idea.idc.myacts.R;
 import com.idea.idc.myacts.adapter.TaskItemAdapter;
-import com.idea.idc.myacts.adapter.TaskListAdapter;
 import com.idea.idc.myacts.database.AppDatabase;
-import com.idea.idc.myacts.entity.Aktivitas;
 import com.idea.idc.myacts.entity.TaskItem;
 import com.idea.idc.myacts.entity.TaskList;
 import com.idea.idc.myacts.view.fragment.TaskFragment;
@@ -32,7 +30,6 @@ import com.idea.idc.myacts.view.fragment.TaskFragment;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 
 public class TaskDetail extends AppCompatActivity {
 
@@ -41,8 +38,11 @@ public class TaskDetail extends AppCompatActivity {
     private TaskItemAdapter taskItemAdapter;
     private EditText txt_name, txt_desc;
     private Button btn_add_task;
+    private Button btn_update_list;
+    private Button btn_hapus_list;
     private List<TaskItem> taskItems;
     private Dialog dialog;
+    private TaskList task;
     private DatePickerDialog datePickerDialog;
     private TimePickerDialog timePickerDialog;
     private SimpleDateFormat dateFormatter;
@@ -53,7 +53,8 @@ public class TaskDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_detail);
 
-        Intent intent = getIntent();
+        //get id task list
+        final Intent intent = getIntent();
         String message = intent.getStringExtra(TaskFragment.ID_MESSAGE);
         id = Integer.valueOf(message);
 
@@ -63,7 +64,8 @@ public class TaskDetail extends AppCompatActivity {
         db = Room.databaseBuilder(getApplicationContext(),AppDatabase.class,"aktivitas")
                 .allowMainThreadQueries().build();
 
-        TaskList task = db.taskListDao().getTaskById(id);
+        // get data task
+        task = db.taskListDao().getTaskById(id);
         dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
 
         txt_name.setText(task.getName());
@@ -93,6 +95,34 @@ public class TaskDetail extends AppCompatActivity {
                 showDialogTambah();
             }
         });
+
+        btn_update_list = findViewById(R.id.btn_update_list);
+        btn_update_list.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                task.setId_list(id);
+                task.setName(txt_name.getText().toString());
+                task.setDescription(txt_desc.getText().toString());
+                db.taskListDao().updateTaskList(task);
+
+                Toast.makeText(getApplicationContext(), "Data Berhasil di ubah", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        btn_hapus_list = findViewById(R.id.btn_hapus_list);
+        btn_hapus_list.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                db.taskListDao().deleteTaskList(task);
+
+                Intent intent1 = new Intent(TaskDetail.this, HomeActivity.class);
+                intent1.putExtra("DATAINTENT","task_fragment");
+                startActivity(intent1);
+
+                Toast.makeText(getApplicationContext(),"Data berhasil di ubah", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     private void showDialogTambah(){

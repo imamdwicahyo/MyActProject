@@ -40,8 +40,15 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
 //            );
 //        }
 
-        // set default fragment
-        loadFragment(new HomeFragment());
+        final Intent intent = getIntent();
+        String message = intent.getStringExtra("DATAINTENT");
+
+        if (message == "task_fragment"){
+            loadFragment(new TaskFragment());
+        }else{
+            // set default fragment
+            loadFragment(new HomeFragment());
+        }
 
         // BottomNavigaionView listener
         BottomNavigationView bottomNavigationView = findViewById(R.id.nav_view);

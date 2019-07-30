@@ -32,7 +32,9 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="8dp"
                 android:layout_toRightOf="@id/check_taskItem"
-                android:text="Nama Task"/>
+                android:text="Nama Task"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/txt_taskItem_tanggal"

@@ -22,17 +22,19 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="10dp"
-                android:text="Task List Name"/>
+                android:layout_marginTop="7dp"
+                android:textStyle="bold"
+                android:layout_marginLeft="20dp"
+                android:text="Task List Name"
+                android:textSize="18dp"/>
 
             <CheckBox
                 android:id="@+id/check_taskList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="7dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="13dp"
                 android:layout_below="@id/txt_taskList_name"
                 android:enabled="false"
                 android:checked="true"/>
@@ -41,7 +43,7 @@
                 android:id="@+id/txt_taskList_check"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_below="@id/txt_taskList_name"
                 android:layout_toRightOf="@id/check_taskList"
                 android:text="0"/>
@@ -50,7 +52,7 @@
                 android:id="@+id/txt_garing"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_below="@id/txt_taskList_name"
                 android:layout_toRightOf="@id/txt_taskList_check"
                 android:text="/"/>
@@ -59,20 +61,11 @@
                 android:id="@+id/txt_taskList_all"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_below="@id/txt_taskList_name"
                 android:layout_toRightOf="@id/txt_garing"
                 android:text="0"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="20dp"
-                android:layout_marginTop="8dp"
-                android:layout_below="@id/txt_taskList_name"
-                android:text="20/09/2019"/>
 
         </RelativeLayout>
 
