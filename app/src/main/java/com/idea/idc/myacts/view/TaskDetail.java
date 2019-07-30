@@ -27,8 +27,10 @@ import com.idea.idc.myacts.entity.TaskItem;
 import com.idea.idc.myacts.entity.TaskList;
 import com.idea.idc.myacts.view.fragment.TaskFragment;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class TaskDetail extends AppCompatActivity {
@@ -145,10 +147,17 @@ public class TaskDetail extends AppCompatActivity {
         btn_simpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Date date = null;
+                try {
+                    date = dateFormatter.parse(txt_tanggal.getText().toString());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
                 TaskItem task = new TaskItem();
                 task.setId_list(id);
                 task.setName(ed_taskItem_nama.getText().toString());
                 task.setDesc(ed_taskItem_desc.getText().toString());
+                task.setDate(date);
                 task.setTime(txt_time.getText().toString());
                 task.setStatus("0");
 
@@ -197,6 +206,9 @@ public class TaskDetail extends AppCompatActivity {
         txt_id.setText(String.valueOf(task.getId_task()));
         ed_taskItem_nama.setText(task.getName());
         ed_taskItem_desc.setText(task.getDesc());
+        if (task.getDate() != null){
+            txt_tanggal.setText(dateFormatter.format(task.getDate()));
+        }
         txt_time.setText(task.getTime());
 
         Button btn_simpan = dialog.findViewById(R.id.btn_simpan);

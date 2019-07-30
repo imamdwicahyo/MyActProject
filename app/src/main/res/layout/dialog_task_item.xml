@@ -56,7 +56,7 @@
             android:layout_marginTop="13dp"
             android:layout_toRightOf="@id/tanggal"
             android:layout_toLeftOf="@id/btn_setDate"
-            android:text="--/--/--"/>
+            android:text=""/>
 
         <Button
             android:id="@+id/btn_setDate"
@@ -90,7 +90,7 @@
             android:layout_marginTop="13dp"
             android:layout_toRightOf="@id/time"
             android:layout_toLeftOf="@id/btn_setTime"
-            android:text="--/--/--"/>
+            android:text=""/>
 
         <Button
             android:id="@+id/btn_setTime"
