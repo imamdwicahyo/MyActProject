@@ -132,8 +132,10 @@ public class TaskDetail extends AppCompatActivity {
 
         final EditText ed_taskItem_nama = dialog.findViewById(R.id.ed_taskItem_name);
         final EditText ed_taskItem_desc = dialog.findViewById(R.id.ed_taskItem_desc);
-        final EditText ed_taskItem_tanggal = dialog.findViewById(R.id.ed_taskItem_tanggal);
-        final EditText ed_taskItem_waktu = dialog.findViewById(R.id.ed_taskItem_waktu);
+        final TextView txt_tanggal = dialog.findViewById(R.id.txt_date);
+        final TextView txt_time = dialog.findViewById(R.id.txt_time);
+        final Button btn_setDate = dialog.findViewById(R.id.btn_setDate);
+        final Button btn_setTime = dialog.findViewById(R.id.btn_setTime);
 
 
         Button btn_hapus = dialog.findViewById(R.id.btn_hapus);
@@ -147,7 +149,7 @@ public class TaskDetail extends AppCompatActivity {
                 task.setId_list(id);
                 task.setName(ed_taskItem_nama.getText().toString());
                 task.setDesc(ed_taskItem_desc.getText().toString());
-                task.setTime(ed_taskItem_waktu.getText().toString());
+                task.setTime(txt_time.getText().toString());
                 task.setStatus("0");
 
                 db.taskItemDao().insertTaskItem(task);
@@ -160,17 +162,17 @@ public class TaskDetail extends AppCompatActivity {
             }
         });
 
-        ed_taskItem_tanggal.setOnClickListener(new View.OnClickListener() {
+        btn_setDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDateDialog(ed_taskItem_tanggal, dialog.getContext());
+                showDateDialog(txt_tanggal, dialog.getContext());
             }
         });
 
-        ed_taskItem_waktu.setOnClickListener(new View.OnClickListener() {
+        btn_setTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showTimeDialog(ed_taskItem_waktu, dialog.getContext());
+                showTimeDialog(txt_time, dialog.getContext());
             }
         });
 
@@ -187,13 +189,15 @@ public class TaskDetail extends AppCompatActivity {
         final TextView txt_id = dialog.findViewById(R.id.txt_id);
         final EditText ed_taskItem_nama = dialog.findViewById(R.id.ed_taskItem_name);
         final EditText ed_taskItem_desc = dialog.findViewById(R.id.ed_taskItem_desc);
-        final EditText ed_taskItem_tanggal = dialog.findViewById(R.id.ed_taskItem_tanggal);
-        final EditText ed_taskItem_waktu = dialog.findViewById(R.id.ed_taskItem_waktu);
+        final TextView txt_tanggal = dialog.findViewById(R.id.txt_date);
+        final TextView txt_time = dialog.findViewById(R.id.txt_time);
+        final Button btn_setDate = dialog.findViewById(R.id.btn_setDate);
+        final Button btn_setTime = dialog.findViewById(R.id.btn_setTime);
 
         txt_id.setText(String.valueOf(task.getId_task()));
         ed_taskItem_nama.setText(task.getName());
         ed_taskItem_desc.setText(task.getDesc());
-        ed_taskItem_waktu.setText(task.getTime());
+        txt_time.setText(task.getTime());
 
         Button btn_simpan = dialog.findViewById(R.id.btn_simpan);
         btn_simpan.setOnClickListener(new View.OnClickListener() {
@@ -204,7 +208,7 @@ public class TaskDetail extends AppCompatActivity {
                 task.setId_list(id);
                 task.setName(ed_taskItem_nama.getText().toString());
                 task.setDesc(ed_taskItem_desc.getText().toString());
-                task.setTime(ed_taskItem_waktu.getText().toString());
+                task.setTime(txt_time.getText().toString());
                 task.setStatus("0");
 
                 db.taskItemDao().updateTaskItem(task);
@@ -226,7 +230,7 @@ public class TaskDetail extends AppCompatActivity {
                 task.setId_list(id);
                 task.setName(ed_taskItem_nama.getText().toString());
                 task.setDesc(ed_taskItem_desc.getText().toString());
-                task.setTime(ed_taskItem_waktu.getText().toString());
+                task.setTime(txt_time.getText().toString());
                 task.setStatus("0");
 
                 db.taskItemDao().deleteTaskItem(task);
@@ -239,12 +243,26 @@ public class TaskDetail extends AppCompatActivity {
             }
         });
 
+        btn_setDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDateDialog(txt_tanggal, dialog.getContext());
+            }
+        });
+
+        btn_setTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showTimeDialog(txt_time, dialog.getContext());
+            }
+        });
+
         if (!dialog.isShowing()) {
             dialog.show();
         }
     }
 
-    private void showDateDialog(final EditText editText, Context context){
+    private void showDateDialog(final TextView editText, Context context){
         Calendar newCalendar = Calendar.getInstance();
         datePickerDialog = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
 
@@ -262,7 +280,7 @@ public class TaskDetail extends AppCompatActivity {
         datePickerDialog.show();
     }
 
-    private void showTimeDialog(final EditText editText, Context context){
+    private void showTimeDialog(final TextView editText, Context context){
         Calendar newCalendar = Calendar.getInstance();
         timePickerDialog = new TimePickerDialog(context, new TimePickerDialog.OnTimeSetListener() {
             @Override
