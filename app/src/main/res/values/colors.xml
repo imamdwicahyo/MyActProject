@@ -2,11 +2,14 @@
 <resources>
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#222f3e</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorAccent">#222f3e</color>
 
     //costume
     <color name="greyTheme">#222f3e</color>
     <color name="backtheme">#c8d6e5</color>
+    <color name="backtheme2">#dcdde1</color>
+    <color name="btn_red">#c0392b</color>
+    <color name="btn_green">#27ae60</color>
 
 
     <!-- dots inactive colors -->

@@ -26,7 +26,8 @@
                 android:textStyle="bold"
                 android:layout_marginLeft="20dp"
                 android:text="Task List Name"
-                android:textSize="18dp"/>
+                android:textSize="18dp"
+                android:textColor="@color/greyTheme"/>
 
             <CheckBox
                 android:id="@+id/check_taskList"

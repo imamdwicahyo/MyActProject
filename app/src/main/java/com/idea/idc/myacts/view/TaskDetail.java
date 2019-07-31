@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -122,6 +123,16 @@ public class TaskDetail extends AppCompatActivity {
                 startActivity(intent1);
 
                 Toast.makeText(getApplicationContext(),"Data berhasil di ubah", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        ImageView btn_back = findViewById(R.id.btn_back);
+        btn_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(TaskDetail.this, HomeActivity.class);
+                intent1.putExtra("DATAINTENT","task_fragment");
+                startActivity(intent1);
             }
         });
 

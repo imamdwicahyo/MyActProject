@@ -125,8 +125,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:gravity="center"
-                    android:orientation="vertical"
-                    android:onClick="btn_today">
+                    android:orientation="vertical">
 
                     <ImageView
                         android:layout_width="50dp"
@@ -191,7 +190,8 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="5dp"
                 android:layout_marginHorizontal="5dp"
-                android:background="@android:color/white">
+                android:background="@android:color/white"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -202,6 +202,13 @@
                     android:textAlignment="center"
                     android:textStyle="bold"
                     android:textColor="@android:color/black"/>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_taskHome"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    />
 
             </LinearLayout>
 

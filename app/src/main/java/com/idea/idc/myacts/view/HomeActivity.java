@@ -43,7 +43,7 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         final Intent intent = getIntent();
         String message = intent.getStringExtra("DATAINTENT");
 
-        if (message == "task_fragment"){
+        if (message != ""){
             loadFragment(new TaskFragment());
         }else{
             // set default fragment

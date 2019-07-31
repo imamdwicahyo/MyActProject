@@ -15,7 +15,8 @@ import java.util.Date;
 @Entity(tableName = "task_item",
         foreignKeys = @ForeignKey(entity = TaskList.class,
                                   parentColumns = "id_list",
-                                  childColumns = "id_list"))
+                                  childColumns = "id_list"
+                                  ))
 public class TaskItem {
     @PrimaryKey(autoGenerate = true)
     private int id_task;
