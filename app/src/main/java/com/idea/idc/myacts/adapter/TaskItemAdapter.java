@@ -39,7 +39,7 @@ public class TaskItemAdapter extends RecyclerView.Adapter<TaskItemAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder vewHolder, int i) {
         TaskItem task = taskItems.get(i);
         vewHolder.txt_id_task.setText(String.valueOf(task.getId_task()));
-        vewHolder.txt_listItem_nama.setText(task.getName()+" - ["+task.getStatus()+"]");
+        vewHolder.txt_listItem_nama.setText(task.getName());
         if (task.getDate() != null){
             vewHolder.txt_taskItem_tanggal.setText(dateFormatter.format(task.getDate()));
         }else{

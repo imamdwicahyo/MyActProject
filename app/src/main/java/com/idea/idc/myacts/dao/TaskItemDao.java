@@ -9,6 +9,7 @@ import android.arch.persistence.room.Update;
 
 import com.idea.idc.myacts.entity.TaskItem;
 
+import java.util.Date;
 import java.util.List;
 
 @Dao
@@ -16,6 +17,12 @@ public interface TaskItemDao {
 
     @Query("SELECT * FROM task_item")
     List<TaskItem> getAll();
+
+    @Query("SELECT * FROM task_item WHERE date BETWEEN :from AND :to")
+    List<TaskItem> getAllByDateBetween(Date from, Date to);
+
+    @Query("SELECT * FROM task_item WHERE date = :tgl")
+    List<TaskItem> getAllByDate(Date tgl);
 
     @Query("SELECT * FROM task_item WHERE id_list = :id")
     List<TaskItem> getTaskItemById(int id);
