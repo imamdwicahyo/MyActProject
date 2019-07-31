@@ -221,6 +221,7 @@ public class TaskDetail extends AppCompatActivity {
             txt_tanggal.setText(dateFormatter.format(task.getDate()));
         }
         txt_time.setText(task.getTime());
+        final String status = task.getStatus();
 
         Button btn_simpan = dialog.findViewById(R.id.btn_simpan);
         btn_simpan.setOnClickListener(new View.OnClickListener() {
@@ -232,7 +233,7 @@ public class TaskDetail extends AppCompatActivity {
                 task.setName(ed_taskItem_nama.getText().toString());
                 task.setDesc(ed_taskItem_desc.getText().toString());
                 task.setTime(txt_time.getText().toString());
-                task.setStatus("0");
+                task.setStatus(status);
 
                 db.taskItemDao().updateTaskItem(task);
                 Toast.makeText(getApplicationContext(),"Data ditambahkan", Toast.LENGTH_SHORT).show();
@@ -254,7 +255,6 @@ public class TaskDetail extends AppCompatActivity {
                 task.setName(ed_taskItem_nama.getText().toString());
                 task.setDesc(ed_taskItem_desc.getText().toString());
                 task.setTime(txt_time.getText().toString());
-                task.setStatus("0");
 
                 db.taskItemDao().deleteTaskItem(task);
                 Toast.makeText(getApplicationContext(),"Data dihapus", Toast.LENGTH_SHORT).show();
