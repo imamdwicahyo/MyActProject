@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.idea.idc.myacts.R;
@@ -35,6 +36,7 @@ public class HomeFragment extends Fragment {
     private TaskItemAdapter taskItemAdapter;
     private List<TaskItem> taskItems;
     private ImageView btn_today, btn_week, btn_month;
+    private TextView total_list, total_task;
     private SimpleDateFormat formatDate;
 
     @Nullable
@@ -45,6 +47,8 @@ public class HomeFragment extends Fragment {
         db = Room.databaseBuilder(getContext(),AppDatabase.class,"aktivitas")
                 .allowMainThreadQueries().build();
 
+        total_list = view.findViewById(R.id.txt_total_list);
+        total_task = view.findViewById(R.id.txt_total_task);
         btn_today = view.findViewById(R.id.btn_today);
         btn_week = view.findViewById(R.id.btn_week);
         btn_month = view.findViewById(R.id.btn_month);
@@ -53,6 +57,9 @@ public class HomeFragment extends Fragment {
         final String date = formatDate.format(new Date());
 
         taskItems = db.taskItemDao().getAll();
+
+        total_list.setText(String.valueOf(db.taskListDao().totalList()));
+        total_task.setText(String.valueOf(db.taskItemDao().totalTask()));
 
         recyclerView = view.findViewById(R.id.recycler_taskHome);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

@@ -33,6 +33,9 @@ public interface TaskItemDao {
     @Query("SELECT COUNT(id_task) FROM task_item WHERE id_list = :id AND status = '1'")
     int countTaskSuccess(int id);
 
+    @Query("SELECT COUNT(id_task) FROM task_item")
+    int totalTask();
+
     @Query("SELECT * FROM task_item WHERE id_task = :id")
     TaskItem getTaskItemByIdTask(int id);
 

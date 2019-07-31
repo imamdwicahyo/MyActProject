@@ -20,6 +20,9 @@ public interface TaskListDao {
     @Query("SELECT * FROM task_list WHERE id_list = :id")
     TaskList getTaskById(int id);
 
+    @Query("SELECT COUNT(id_list) FROM task_list")
+    int totalList();
+
     @Insert
     void insertTaskList(TaskList taskList);
 

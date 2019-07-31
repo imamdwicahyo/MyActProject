@@ -29,9 +29,9 @@
                     android:layout_height="80dp"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
-                    android:layout_marginTop="100dp"
+                    android:layout_marginTop="50dp"
                     android:layout_marginLeft="20dp"
-                    android:src="@drawable/photo_profil"
+                    android:src="@drawable/logo"
                     app:civ_border_width="2dp"
                     app:civ_border_color="@color/greyTheme"/>
 
@@ -40,7 +40,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@id/profile_image"
-                    android:layout_marginTop="110dp"
+                    android:layout_marginTop="70dp"
                     android:layout_marginLeft="30dp"
                     android:text="Imam Dwi Cahyo"
                     android:textSize="20dp"
@@ -50,7 +50,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
-                    android:layout_marginTop="10dp"
                     android:layout_below="@id/profile_image">
 
                     <LinearLayout
@@ -63,14 +62,16 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Your Task"
+                            android:text="Total List"
                             android:textStyle="bold"
                             android:textColor="@android:color/white"/>
 
                         <TextView
+                            android:id="@+id/txt_total_list"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="10"
+                            android:textSize="30dp"
                             android:textStyle="bold"
                             android:textColor="@android:color/white"/>
 
@@ -86,14 +87,16 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Your Task"
+                            android:text="Total Task"
                             android:textStyle="bold"
                             android:textColor="@android:color/white"/>
 
                         <TextView
+                            android:id="@+id/txt_total_task"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="10"
+                            android:textSize="30dp"
                             android:textStyle="bold"
                             android:textColor="@android:color/white"/>
 
